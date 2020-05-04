@@ -36,11 +36,11 @@ $(document).ready(function(){
 
         articles.map((article, i) => {
 
-            let publishedAt = new Date(article.publishedAt);
+            let publishedAt = moment(article.publishedAt);
 
             let post = `<article class="post">
                             <h2>${article.title}</h2>
-                            <span class="date">${publishedAt.getFullYear()}/${publishedAt.getMonth()+1}/${publishedAt.getDate()} ${publishedAt.getHours()}:${publishedAt.getMinutes()}:${publishedAt.getSeconds()}</span>
+                            <span class="date">${publishedAt.format("MMMM D YYYY")}</span>
                             <p>
                                 ${article.description}
                             </p>
