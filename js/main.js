@@ -121,4 +121,14 @@ $(document).ready(function(){
         $("#accordion").accordion();
     }
 
+    // Clock
+    if(window.location.href.indexOf("clock") > -1){
+
+        setInterval(function(){
+            var clock = moment().format("hh:mm:ss");
+            $("#clock").html(clock);
+        }, 1000);
+        
+    }
+
 });
