@@ -55,4 +55,19 @@ $(document).ready(function(){
 
     }
 
+    // Themes
+    var theme = $("#theme");
+
+    $("#to-blue").click(function() {
+        theme.attr("href", "css/blue.css");
+    });
+
+    $("#to-red").click(function() {
+        theme.attr("href", "css/red.css");
+    });
+
+    $("#to-green").click(function() {
+        theme.attr("href", "css/green.css");
+    });
+
 });
