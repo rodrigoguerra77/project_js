@@ -19,3 +19,10 @@ body {
 .loader {
     border-top: 16px solid #1F87C4;
 }
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #1F87C4 !important;
+    background: #1F87C4 !important;
+    font-weight: normal !important;
+    color: #fff !important;
+}

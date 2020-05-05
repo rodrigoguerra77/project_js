@@ -1,58 +1,62 @@
 $(document).ready(function(){
     
     // Slider
-    $('.bxslider').bxSlider({
-        mode: 'fade',
-        captions: true,
-        pager: false,
-        slideWidth: 1200,
-        auto: true,
-        responsive: true
-    });
+    if(window.location.href.indexOf("index") > -1){
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            captions: true,
+            pager: false,
+            slideWidth: 1200,
+            auto: true,
+            responsive: true
+        });
+    }
 
     // Posts
-    var posts = $('#posts');
-    var loading = $('.main-loader');
+    if(window.location.href.indexOf("index") > -1){
+        var posts = $('#posts');
+        var loading = $('.main-loader');
 
-    fetch('http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=f6aac9d7150c454a98aa2d2949d39181')
-        .then(articles => articles.json())
-        .then(response => {
+        fetch('http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=f6aac9d7150c454a98aa2d2949d39181')
+            .then(articles => articles.json())
+            .then(response => {
 
-            listArticles(response.articles);
+                listArticles(response.articles);
 
-        }).catch(error => {
-            console.log(error);
+            }).catch(error => {
+                console.log(error);
 
-            let errorMessage = `<div class="error-message">
-                                    <span class="error-text">Ha ocurrido un error, los artículos no se pudieron cargar.</span>
-                                </div>`;
-            
-            posts.append(errorMessage);
+                let errorMessage = `<div class="error-message">
+                                        <span class="error-text">Ha ocurrido un error, los artículos no se pudieron cargar.</span>
+                                    </div>`;
+                
+                posts.append(errorMessage);
 
-            loading.hide();
-        });
+                loading.hide();
+            });
 
-    function listArticles(articles) {
+        function listArticles(articles) {
 
-        articles.map((article, i) => {
+            articles.map((article, i) => {
 
-            let publishedAt = moment(article.publishedAt);
+                let publishedAt = moment(article.publishedAt);
 
-            let post = `<article class="post">
-                            <h2>${article.title}</h2>
-                            <span class="date">${publishedAt.format("MMMM D YYYY")}</span>
-                            <p>
-                                ${article.description}
-                            </p>
-                            <a href="${article.url}" class="button-more">Leer más</a>
-                        </article>
-                        <hr>`;
+                let post = `<article class="post">
+                                <h2>${article.title}</h2>
+                                <span class="date">${publishedAt.format("MMMM D YYYY")}</span>
+                                <p>
+                                    ${article.description}
+                                </p>
+                                <a href="${article.url}" class="button-more">Leer más</a>
+                            </article>
+                            <hr>`;
 
-            posts.append(post);
+                posts.append(post);
 
-            loading.hide();
-        });
+                loading.hide();
+            });
 
+        }
     }
 
     // Themes
@@ -110,6 +114,11 @@ $(document).ready(function(){
             localStorage.removeItem("user");
             location.reload();
         });
+    }
+
+    // Accordion
+    if(window.location.href.indexOf("about") > -1){
+        $("#accordion").accordion();
     }
 
 });
