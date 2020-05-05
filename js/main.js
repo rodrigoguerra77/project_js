@@ -70,7 +70,7 @@ $(document).ready(function(){
         theme.attr("href", "css/green.css");
     });
 
-    // Scroll arriba
+    // Scroll up
     $('.up').click(function(e) {
         e.preventDefault();
 
@@ -80,5 +80,36 @@ $(document).ready(function(){
 
         return false;
     });
+
+    // Login False
+    var form = $("#login form");
+
+    form.submit(function() {
+        let name = $("#name").val();
+        let email = $("#email").val();
+        let password = $("#password").val();
+
+        let user = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+        localStorage.setItem("user", JSON.stringify(user));
+    });
+
+    var user = JSON.parse(localStorage.getItem("user"));
+
+    if(user != null && user != "undefined"){
+        let about = $("#about p");
+        about.html("<br><strong>Bienvenido, " + user.name + "</strong>");
+        about.append("<br><a href='#' id='logout'>Cerrar Sesión</a>")
+        form.parent().hide();
+
+        $("#logout").click(function() {
+            localStorage.removeItem("user");
+            location.reload();
+        });
+    }
 
 });
